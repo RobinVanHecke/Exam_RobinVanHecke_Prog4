@@ -4,8 +4,6 @@
 class RenderComponent final: public ComponentBase
 {
 public:
-	void Update() override;
-
 	RenderComponent();
 	~RenderComponent();
 	RenderComponent(const RenderComponent& other) = delete;
@@ -13,6 +11,6 @@ public:
 	RenderComponent& operator=(const RenderComponent& other) = delete;
 	RenderComponent& operator=(RenderComponent&& other) = delete;
 
-private:
+	void Update() override;
 };
 

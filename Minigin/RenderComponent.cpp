@@ -2,5 +2,4 @@
 
 RenderComponent::RenderComponent()
 {
-	m_typeName = "RenderComponent";
 }

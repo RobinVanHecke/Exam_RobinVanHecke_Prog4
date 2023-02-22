@@ -4,8 +4,6 @@
 class ComponentBase
 {
 public:
-	virtual void Update();
-
 	ComponentBase() = default;
 	virtual ~ComponentBase() = default;
 	ComponentBase(const ComponentBase& other) = delete;
@@ -13,7 +11,6 @@ public:
 	ComponentBase& operator=(const ComponentBase& other) = delete;
 	ComponentBase& operator=(ComponentBase&& other) = delete;
 
-protected:
-	std::string m_typeName;
+	virtual void Update();
 };
 

@@ -2,5 +2,4 @@
 
 TextComponent::TextComponent()
 {
-	m_typeName = "TextComponent";
 }
