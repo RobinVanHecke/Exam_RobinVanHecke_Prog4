@@ -1,8 +1,6 @@
 #include "Scene.h"
 #include "GameObject.h"
 
-#include "RenderComponent.h"
-
 using namespace dae;
 
 unsigned int Scene::m_idCounter = 0;
