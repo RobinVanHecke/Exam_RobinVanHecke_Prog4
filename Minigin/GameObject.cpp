@@ -12,19 +12,10 @@ void dae::GameObject::Update(const float /*deltaT*/)
 
 void dae::GameObject::Render() const
 {
-	const auto& pos = m_Transform.GetPosition();
-	Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
+	//const auto& pos = m_Transform.GetPosition();
+	
 }
 
-void dae::GameObject::SetTexture(const std::string& filename)
-{
-	m_texture = ResourceManager::GetInstance().LoadTexture(filename);
-}
-
-void dae::GameObject::SetPosition(const float x, const float y)
-{
-	m_Transform.SetPosition(x, y, 0.0f);
-}
 
 void dae::GameObject::SetDeleted(const bool deleted)
 {

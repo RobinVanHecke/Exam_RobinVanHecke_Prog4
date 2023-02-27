@@ -12,6 +12,11 @@
 
 class TextureComponent;
 
+TextComponent::TextComponent(const std::shared_ptr<dae::GameObject>& gameObject):
+ComponentBase(gameObject)
+{
+}
+
 void TextComponent::SetText(const std::string& text)
 {
 	m_Text = text;

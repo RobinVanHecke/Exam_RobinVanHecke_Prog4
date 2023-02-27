@@ -12,12 +12,11 @@ namespace dae
 {
 	class Texture2D;
 
-	// todo: this should become final.
-	class GameObject // i know should be final here, but i couldnt get it to work with text component so i have it like this so it at least builds
+	class GameObject final
 	{
 	public:
 
-		template<typename Comp> Comp* AddComponent(Comp component);
+		template<typename Comp> Comp* AddComponent();
 		template<typename Comp> Comp* GetComponent() const;
 		template<typename Comp> void RemoveComponent();
 
@@ -25,9 +24,7 @@ namespace dae
 		virtual void Update(float deltaT);
 		virtual void Render() const;
 
-		void SetTexture(const std::string& filename);
-		void SetPosition(float x, float y);
-
+		
 		void SetDeleted(bool deleted);
 		bool GetDeleted() const;
 
@@ -45,16 +42,15 @@ namespace dae
 
 		Transform m_Transform{};
 
-		// todo: mmm, every gameobject has a texture? Is that correct?
-		std::shared_ptr<Texture2D> m_texture{};
+		
 	};
 
 	template <typename Comp>
-	Comp* GameObject::AddComponent(Comp)
+	Comp* GameObject::AddComponent()
 	{
-		m_Components.emplace(typeid(Comp), new Comp);
+		m_Components.emplace(typeid(Comp), new Comp{ std::shared_ptr<GameObject>(this) });
 
-		return new Comp;
+		return dynamic_cast<Comp*>(m_Components.at(typeid(Comp)));
 	}
 
 	template <typename Comp>
