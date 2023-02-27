@@ -24,13 +24,13 @@ void Scene::RemoveAll()
 	m_objects.clear();
 }
 
-void Scene::Update()
+void Scene::Update(const float deltaT)
 {
 	std::vector<std::shared_ptr<GameObject>> deletedObjects;
 
 	for(auto& object : m_objects)
 	{
-		object->Update();
+		object->Update(deltaT);
 
 		if (object->GetDeleted())
 			deletedObjects.push_back(object);

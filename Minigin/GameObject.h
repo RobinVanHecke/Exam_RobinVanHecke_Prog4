@@ -22,7 +22,7 @@ namespace dae
 		template<typename Comp> void RemoveComponent();*/
 
 
-		virtual void Update();
+		virtual void Update(float deltaT);
 		virtual void Render() const;
 
 		void SetTexture(const std::string& filename);
