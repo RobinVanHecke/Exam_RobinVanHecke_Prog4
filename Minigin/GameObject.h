@@ -17,9 +17,9 @@ namespace dae
 	{
 	public:
 
-		/*template<typename Comp> Comp* AddComponent(Comp component);
+		template<typename Comp> Comp* AddComponent(Comp component);
 		template<typename Comp> Comp* GetComponent() const;
-		template<typename Comp> void RemoveComponent();*/
+		template<typename Comp> void RemoveComponent();
 
 
 		virtual void Update(float deltaT);
@@ -41,7 +41,7 @@ namespace dae
 	private:
 		bool m_Deleted{ false };
 
-	/*	std::unordered_map<std::type_index, ComponentBase> m_Components;*/
+		std::unordered_map<std::type_index, ComponentBase*> m_Components;
 
 		Transform m_Transform{};
 
@@ -49,10 +49,10 @@ namespace dae
 		std::shared_ptr<Texture2D> m_texture{};
 	};
 
-	/*template <typename Comp>
-	Comp* GameObject::AddComponent(Comp component)
+	template <typename Comp>
+	Comp* GameObject::AddComponent(Comp)
 	{
-		m_Components.emplace(typeid(component), new Comp);
+		m_Components.emplace(typeid(Comp), new Comp);
 
 		return new Comp;
 	}
@@ -61,6 +61,7 @@ namespace dae
 	Comp* GameObject::GetComponent() const
 	{
 		static_assert(std::is_base_of_v<ComponentBase, Comp>, "Component must derive from ComponentBase");
+
 		const auto it = m_Components.find(typeid(Comp));
 
 		if (it != m_Components.end())
@@ -74,5 +75,5 @@ namespace dae
 	void GameObject::RemoveComponent()
 	{
 		m_Components.erase(typeid(Comp));
-	}*/
+	}
 }
