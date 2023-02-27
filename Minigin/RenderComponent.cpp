@@ -3,17 +3,20 @@
 #include "GameObject.h"
 #include "Renderer.h"
 #include "TextureComponent.h"
+#include "TransformComponent.h"
 
 RenderComponent::RenderComponent(const std::shared_ptr<dae::GameObject>& gameObject) :
 	ComponentBase(gameObject)
 {
+	m_pTexture = GetOwner()->GetComponent<TextureComponent>();
+	m_pTransform = GetOwner()->GetComponent<TransformComponent>();
 }
 
-void RenderComponent::Render()
+void RenderComponent::Render() const
 {
-	if (m_pOwner.get()->GetComponent<TextureComponent>()->GetTexture() != nullptr)
+	if (m_pTexture != nullptr)
 	{
-		const auto& pos = m_transform.GetPosition();
-		dae::Renderer::GetInstance().RenderTexture(*m_textTexture, pos.x, pos.y);
+		const auto& pos = m_pTransform->GetPos();
+		dae::Renderer::GetInstance().RenderTexture(*m_pTexture->GetTexture(), pos.x, pos.y);
 	}
 }

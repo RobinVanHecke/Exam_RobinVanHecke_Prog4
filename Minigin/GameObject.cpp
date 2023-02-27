@@ -7,12 +7,18 @@ dae::GameObject::~GameObject() = default;
 
 void dae::GameObject::Update(const float /*deltaT*/)
 {
-	
+	for (const auto component : m_Components)
+	{
+		component.second->Update();
+	}
 }
 
 void dae::GameObject::Render() const
 {
-	//const auto& pos = m_Transform.GetPosition();
+	for (const auto component : m_Components)
+	{
+		component.second->Render();
+	}
 	
 }
 

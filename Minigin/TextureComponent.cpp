@@ -6,7 +6,7 @@ TextureComponent::TextureComponent(const std::shared_ptr<dae::GameObject>& gameO
 {
 }
 
-void TextureComponent::SetTexture(const std::shared_ptr<dae::Texture2D>& texture)
+void TextureComponent::SetTexture(const std::shared_ptr<dae::Texture2D> texture)
 {
-	m_Texture = texture;
+	m_pTexture = texture;
 }

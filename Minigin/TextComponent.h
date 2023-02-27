@@ -18,7 +18,7 @@ public:
 	void SetText(const std::string& text);
 	void SetFont(std::shared_ptr<dae::Font> font);
 
-	void Update(dae::GameObject gameObject);
+	void Update() override;
 
 
 private:

@@ -7,9 +7,8 @@
 #include "Renderer.h"
 #include "Font.h"
 #include "GameObject.h"
-#include "Texture2D.h"
 #include "TextureComponent.h"
-
+#include "Texture2D.h"
 class TextureComponent;
 
 TextComponent::TextComponent(const std::shared_ptr<dae::GameObject>& gameObject):
@@ -28,7 +27,7 @@ void TextComponent::SetFont(const std::shared_ptr<dae::Font> font)
 	m_Font = font;
 }
 
-void TextComponent::Update(dae::GameObject gameObject)
+void TextComponent::Update()
 {
 	if (m_NeedsUpdate)
 	{
@@ -49,8 +48,12 @@ void TextComponent::Update(dae::GameObject gameObject)
 
 		SDL_FreeSurface(surf);
 
-		/*if (!m_Text.empty())
-			gameObject.GetComponent<TextureComponent>()->SetTexture(std::make_shared<dae::Texture2D>(texture));*/
+		//dae::Texture2D t{ texture };
+
+		if (!m_Text.empty())
+		{
+			GetOwner()->GetComponent<TextureComponent>()->SetTexture(std::make_shared<dae::Texture2D>(texture));
+		}
 
 		m_NeedsUpdate = false;
 	}

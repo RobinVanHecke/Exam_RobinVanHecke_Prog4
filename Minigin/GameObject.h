@@ -21,19 +21,21 @@ namespace dae
 		template<typename Comp> void RemoveComponent();
 
 
-		virtual void Update(float deltaT);
-		virtual void Render() const;
+		void Update(float deltaT);
+		void Render() const;
 
 		
 		void SetDeleted(bool deleted);
 		bool GetDeleted() const;
 
 		GameObject() = default;
-		virtual ~GameObject();
+		~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
+
+	
 
 	private:
 		bool m_Deleted{ false };
