@@ -5,11 +5,14 @@
 
 dae::GameObject::~GameObject() = default;
 
-void dae::GameObject::Update(){}
+void dae::GameObject::Update()
+{
+	
+}
 
 void dae::GameObject::Render() const
 {
-	const auto& pos = m_transform.GetPosition();
+	const auto& pos = m_Transform.GetPosition();
 	Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
 }
 
@@ -18,7 +21,17 @@ void dae::GameObject::SetTexture(const std::string& filename)
 	m_texture = ResourceManager::GetInstance().LoadTexture(filename);
 }
 
-void dae::GameObject::SetPosition(float x, float y)
+void dae::GameObject::SetPosition(const float x, const float y)
 {
-	m_transform.SetPosition(x, y, 0.0f);
+	m_Transform.SetPosition(x, y, 0.0f);
+}
+
+void dae::GameObject::SetDeleted(const bool deleted)
+{
+	m_Deleted = deleted;
+}
+
+bool dae::GameObject::GetDeleted() const
+{
+	return m_Deleted;
 }

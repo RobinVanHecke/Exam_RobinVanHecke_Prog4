@@ -14,18 +14,17 @@ class TextComponent final : public ComponentBase
 {
 public:
 	TextComponent() = default;
-	TextComponent(const std::string& text, std::shared_ptr<dae::Font> font);
 
 	void SetText(const std::string& text);
-	std::shared_ptr<dae::Texture2D> GetTextTexture() const { return m_TextTexture; }
+	void SetFont(std::shared_ptr<dae::Font> font);
 
-	void Update();
+	void Update(dae::GameObject gameObject);
 
 
 private:
 	bool m_NeedsUpdate;
 	std::string m_Text;
 	std::shared_ptr<dae::Font> m_Font;
-	std::shared_ptr<dae::Texture2D> m_TextTexture;
+
 };
 

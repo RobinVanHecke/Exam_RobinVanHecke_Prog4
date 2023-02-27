@@ -1,20 +1,21 @@
 #pragma once
 #include "ComponentBase.h"
 #include "Renderer.h"
+#include "Transform.h"
 
 class RenderComponent final: public ComponentBase
 {
 public:
-	template<typename T> void Render(T texture, T transform);
+	template<typename T> void Render(T texture, dae::Transform position);
 private:
 };
 
 template <typename T>
-void RenderComponent::Render(T texture, T transform)
+void RenderComponent::Render(T texture, dae::Transform position)
 {
 	if (texture != nullptr)
 	{
-		const auto& pos = transform.GetPosition();
+		const auto& pos = position.GetPosition();
 		dae::Renderer::GetInstance().RenderTexture(*texture, pos.x, pos.y);
 	}
 }

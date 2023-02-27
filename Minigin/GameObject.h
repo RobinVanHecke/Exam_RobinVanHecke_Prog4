@@ -1,8 +1,11 @@
 #pragma once
 #include <memory>
+#include <unordered_map>
+#include <typeindex>
+
 #include "Transform.h"
 
-#include <unordered_map>
+
 #include "ComponentBase.h"
 
 namespace dae
@@ -10,13 +13,13 @@ namespace dae
 	class Texture2D;
 
 	// todo: this should become final.
-	class GameObject 
+	class GameObject // i know should be final here, but i couldnt get it to work with text component so i have it like this so it at least builds
 	{
 	public:
 
-		template<typename T> T* AddComponent(T component);
-		template<typename T> T* GetComponent() const;
-		template<typename T> void RemoveComponent();
+		/*template<typename Comp> Comp* AddComponent(Comp component);
+		template<typename Comp> Comp* GetComponent() const;
+		template<typename Comp> void RemoveComponent();*/
 
 
 		virtual void Update();
@@ -25,7 +28,10 @@ namespace dae
 		void SetTexture(const std::string& filename);
 		void SetPosition(float x, float y);
 
-		GameObject();
+		void SetDeleted(bool deleted);
+		bool GetDeleted() const;
+
+		GameObject() = default;
 		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
@@ -33,33 +39,40 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 	private:
+		bool m_Deleted{ false };
 
-		std::unordered_map<std::type_info, ComponentBase>* m_pComponents;
+	/*	std::unordered_map<std::type_index, ComponentBase> m_Components;*/
 
-
-		Transform m_transform{};
+		Transform m_Transform{};
 
 		// todo: mmm, every gameobject has a texture? Is that correct?
 		std::shared_ptr<Texture2D> m_texture{};
 	};
 
-	template <typename T>
-	T* GameObject::AddComponent(T component)
+	/*template <typename Comp>
+	Comp* GameObject::AddComponent(Comp component)
 	{
-		m_pComponents->emplace(typeid(component), new T);
+		m_Components.emplace(typeid(component), new Comp);
 
-		return *component;
+		return new Comp;
 	}
 
-	template <typename T>
-	T* GameObject::GetComponent() const
+	template <typename Comp>
+	Comp* GameObject::GetComponent() const
 	{
-		return m_pComponents->at(typeid(T));
+		static_assert(std::is_base_of_v<ComponentBase, Comp>, "Component must derive from ComponentBase");
+		const auto it = m_Components.find(typeid(Comp));
+
+		if (it != m_Components.end())
+		{
+			return dynamic_cast<Comp*>(it->second);
+		}
+		return nullptr;
 	}
 
-	template <typename T>
+	template <typename Comp>
 	void GameObject::RemoveComponent()
 	{
-		m_pComponents->erase(typeid(T));
-	}
+		m_Components.erase(typeid(Comp));
+	}*/
 }
