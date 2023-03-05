@@ -1,18 +1,18 @@
 #pragma once
-#include <memory>
 
 namespace dae
 {
 	class GameObject;
 }
 
+
 class ComponentBase
 {
 public:
-	virtual void Update() {}
+	virtual void Update(float /*deltaT*/) {}
 	virtual void Render() const{}
 
-	ComponentBase(dae::GameObject* gameObject);
+	explicit ComponentBase(dae::GameObject* gameObject): m_pOwner( gameObject) {}
 	virtual ~ComponentBase() = default;
 
 	ComponentBase(const ComponentBase& other) = delete;
@@ -20,7 +20,6 @@ public:
 	ComponentBase& operator=(const ComponentBase& other) = delete;
 	ComponentBase& operator=(ComponentBase&& other) = delete;
 
-	//TODO make protected get owner function
 protected:
 	dae::GameObject* GetOwner() const { return m_pOwner; }
 

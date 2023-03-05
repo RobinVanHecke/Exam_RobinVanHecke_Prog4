@@ -10,19 +10,22 @@ namespace dae
 	class Texture2D;
 }
 
+
 class TextComponent final : public ComponentBase
 {
 public:
 	TextComponent(dae::GameObject* gameObject);
 
 	void SetText(const std::string& text);
-	void SetFont(std::shared_ptr<dae::Font> font);
+	void SetText(float floatToText);
+	void SetFont(const std::shared_ptr<dae::Font>& font);
 
-	void Update() override;
+	void Update(float /*deltaT*/) override;
 
 
 private:
 	bool m_NeedsUpdate{ false };
+
 	std::string m_Text;
 	std::shared_ptr<dae::Font> m_Font;
 

@@ -19,7 +19,6 @@ RenderComponent::RenderComponent(dae::GameObject* gameObject) :
 		m_pTransform = std::shared_ptr <TransformComponent>(GetOwner()->GetComponent<TransformComponent>());
 		m_Position = m_pTransform->GetPos();
 	}
-	
 }
 
 void RenderComponent::Render() const

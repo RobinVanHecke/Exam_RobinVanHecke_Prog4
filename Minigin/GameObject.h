@@ -3,9 +3,6 @@
 #include <unordered_map>
 #include <typeindex>
 
-#include "Transform.h"
-
-
 #include "ComponentBase.h"
 
 namespace dae
@@ -28,6 +25,8 @@ namespace dae
 		void SetDeleted(bool deleted);
 		bool GetDeleted() const;
 
+		void SetParent(GameObject* pNewParent);
+
 		GameObject() = default;
 		~GameObject();
 		GameObject(const GameObject& other) = delete;
@@ -41,6 +40,12 @@ namespace dae
 		bool m_Deleted{ false };
 
 		std::unordered_map<std::type_index, ComponentBase*> m_Components;
+
+		GameObject* m_pParent{ nullptr };
+		std::vector<GameObject*> m_pChildren{ nullptr };
+
+		void AddChild();
+		void RemoveChild(GameObject* pChild);
 	};
 
 	template <typename Comp>

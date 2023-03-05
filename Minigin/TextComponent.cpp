@@ -22,12 +22,18 @@ void TextComponent::SetText(const std::string& text)
 	m_NeedsUpdate = true;
 }
 
-void TextComponent::SetFont(const std::shared_ptr<dae::Font> font)
+void TextComponent::SetText(const float floatToText)
+{
+	m_Text = std::to_string(floatToText);
+	m_NeedsUpdate = true;
+}
+
+void TextComponent::SetFont(const std::shared_ptr<dae::Font>& font)
 {
 	m_Font = font;
 }
 
-void TextComponent::Update()
+void TextComponent::Update(float /*deltaT*/)
 {
 	if (m_NeedsUpdate)
 	{
@@ -47,8 +53,6 @@ void TextComponent::Update()
 		}
 
 		SDL_FreeSurface(surf);
-
-		//dae::Texture2D t{ texture };
 
 		if (!m_Text.empty())
 		{
