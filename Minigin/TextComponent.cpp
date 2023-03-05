@@ -11,7 +11,7 @@
 #include "Texture2D.h"
 class TextureComponent;
 
-TextComponent::TextComponent(const std::shared_ptr<dae::GameObject>& gameObject):
+TextComponent::TextComponent(dae::GameObject* gameObject):
 ComponentBase(gameObject)
 {
 }

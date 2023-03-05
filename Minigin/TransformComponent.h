@@ -6,10 +6,10 @@
 class TransformComponent final : public ComponentBase
 {
 public:
-	TransformComponent(const std::shared_ptr<dae::GameObject>& gameObject);
+	TransformComponent(dae::GameObject* gameObject);
 
 	void SetPos(glm::vec3 newPos);
-	void SetPos(float newX, float newY, float newZ);
+	void SetPos(float newX, float newY, float newZ = 0.f);
 	glm::vec3 GetPos() const;
 
 private:

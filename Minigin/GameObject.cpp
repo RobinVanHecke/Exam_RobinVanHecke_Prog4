@@ -3,8 +3,16 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 
-dae::GameObject::~GameObject() = default;
+dae::GameObject::~GameObject()
+{
+	//TODO FIX DESTRUCTOR
 
+	for (auto& component : m_Components)
+	{
+		delete component.second;
+	}
+	m_Components.clear();
+}
 void dae::GameObject::Update(const float /*deltaT*/)
 {
 	for (const auto component : m_Components)

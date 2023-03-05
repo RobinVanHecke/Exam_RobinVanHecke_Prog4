@@ -41,16 +41,12 @@ namespace dae
 		bool m_Deleted{ false };
 
 		std::unordered_map<std::type_index, ComponentBase*> m_Components;
-
-		Transform m_Transform{};
-
-		
 	};
 
 	template <typename Comp>
 	Comp* GameObject::AddComponent()
 	{
-		m_Components.emplace(typeid(Comp), new Comp{ std::shared_ptr<GameObject>(this) });
+		m_Components.emplace(typeid(Comp), new Comp{ this });
 
 		return dynamic_cast<Comp*>(m_Components.at(typeid(Comp)));
 	}
@@ -72,6 +68,7 @@ namespace dae
 	template <typename Comp>
 	void GameObject::RemoveComponent()
 	{
+		delete m_Components.at(typeid(Comp));
 		m_Components.erase(typeid(Comp));
 	}
 }

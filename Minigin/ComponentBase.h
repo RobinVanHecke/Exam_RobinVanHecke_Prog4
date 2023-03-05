@@ -12,7 +12,7 @@ public:
 	virtual void Update() {}
 	virtual void Render() const{}
 
-	ComponentBase(std::shared_ptr<dae::GameObject> gameObject);
+	ComponentBase(dae::GameObject* gameObject);
 	virtual ~ComponentBase() = default;
 
 	ComponentBase(const ComponentBase& other) = delete;
@@ -22,10 +22,10 @@ public:
 
 	//TODO make protected get owner function
 protected:
-	std::shared_ptr<dae::GameObject> GetOwner() const { return m_pOwner; }
+	dae::GameObject* GetOwner() const { return m_pOwner; }
 
 private:
-	std::shared_ptr<dae::GameObject> m_pOwner{ nullptr };
+	dae::GameObject* m_pOwner{ nullptr };
 
 };
 

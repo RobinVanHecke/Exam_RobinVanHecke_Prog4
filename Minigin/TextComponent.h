@@ -13,7 +13,7 @@ namespace dae
 class TextComponent final : public ComponentBase
 {
 public:
-	TextComponent(const std::shared_ptr<dae::GameObject>& gameObject);
+	TextComponent(dae::GameObject* gameObject);
 
 	void SetText(const std::string& text);
 	void SetFont(std::shared_ptr<dae::Font> font);

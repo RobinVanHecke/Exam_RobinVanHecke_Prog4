@@ -3,7 +3,7 @@
 #include "GameObject.h"
 
 
-ComponentBase::ComponentBase(std::shared_ptr<dae::GameObject> gameObject):
-m_pOwner(std::move(gameObject))
+ComponentBase::ComponentBase(dae::GameObject* gameObject):
+m_pOwner(gameObject)
 {
 }

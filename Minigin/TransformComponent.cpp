@@ -1,6 +1,6 @@
 #include "TransformComponent.h"
 
-TransformComponent::TransformComponent(const std::shared_ptr<dae::GameObject>& gameObject) :
+TransformComponent::TransformComponent(dae::GameObject* gameObject) :
 	ComponentBase(gameObject)
 {
 }
