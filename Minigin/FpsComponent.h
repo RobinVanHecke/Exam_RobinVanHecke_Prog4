@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+
 #include "ComponentBase.h"
 
 class FpsComponent final : public ComponentBase
@@ -11,4 +13,5 @@ public:
 
 private:
 	float m_Fps{0};
+	std::string m_FpsString;
 };

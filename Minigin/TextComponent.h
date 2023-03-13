@@ -17,7 +17,6 @@ public:
 	TextComponent(dae::GameObject* gameObject);
 
 	void SetText(const std::string& text);
-	void SetText(float floatToText);
 	void SetFont(const std::shared_ptr<dae::Font>& font);
 
 	void Update(float /*deltaT*/) override;

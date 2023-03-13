@@ -22,12 +22,6 @@ void TextComponent::SetText(const std::string& text)
 	m_NeedsUpdate = true;
 }
 
-void TextComponent::SetText(const float floatToText)
-{
-	m_Text = std::to_string(floatToText);
-	m_NeedsUpdate = true;
-}
-
 void TextComponent::SetFont(const std::shared_ptr<dae::Font>& font)
 {
 	m_Font = font;

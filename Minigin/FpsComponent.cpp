@@ -12,7 +12,10 @@ ComponentBase(gameObject)
 
 void FpsComponent::Update(const float deltaT)
 {
-	m_Fps = deltaT;
+	m_Fps = 1 / deltaT;
 
-	GetOwner()->GetComponent<TextComponent>()->SetText(deltaT);
+	m_Fps = floor(m_Fps);
+
+	m_FpsString = std::to_string(static_cast<int>(m_Fps));
+	GetOwner()->GetComponent<TextComponent>()->SetText(m_FpsString);
 }

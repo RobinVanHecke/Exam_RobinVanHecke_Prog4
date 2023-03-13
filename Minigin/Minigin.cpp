@@ -91,7 +91,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 	bool doContinue = true;
 
-	const auto previous = std::chrono::high_resolution_clock::now();
+	auto previous = std::chrono::high_resolution_clock::now();
 
 	while (doContinue)
 	{
@@ -106,6 +106,8 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		renderer.Render();
 
 		const auto sleepTime = current + std::chrono::milliseconds(msPerFrame) - std::chrono::high_resolution_clock::now();
+
+		previous = current;
 
 		std::this_thread::sleep_for(sleepTime);
 	}
