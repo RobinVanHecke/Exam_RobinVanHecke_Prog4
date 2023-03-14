@@ -1,15 +1,10 @@
 #include "GameObject.h"
 
-
-dae::GameObject::~GameObject()
-{
-	m_Components.erase(m_Components.begin(), m_Components.end());
-	m_Components.clear();
-}
+#include "TransformComponent.h"
 
 void dae::GameObject::Update(const float deltaT)
 {
-	for (const auto& component : m_Components)
+	for (auto& component : m_pComponents)
 	{
 		component.second->Update(deltaT);
 	}
@@ -17,7 +12,7 @@ void dae::GameObject::Update(const float deltaT)
 
 void dae::GameObject::Render() const
 {
-	for (const auto& component : m_Components)
+	for (const auto& component : m_pComponents)
 	{
 		component.second->Render();
 	}
@@ -33,24 +28,30 @@ bool dae::GameObject::GetDeleted() const
 	return m_Deleted;
 }
 
-void dae::GameObject::SetParent(GameObject* pNewParent)
+dae::GameObject::GameObject()
 {
-	m_pParent->RemoveChild(this);
-
-	m_pParent = pNewParent;
-
-	pNewParent->AddChild();
-
-	// TODO update position rotation and scale
+	// GameObject always has a Transform Component
+	AddComponent<TransformComponent>()->SetPos(0.f,0.f);
 }
 
-
-void dae::GameObject::AddChild()
-{
-	m_pChildren.push_back(this);
-}
-
-void dae::GameObject::RemoveChild(GameObject* /*pChild*/)
-{
-	// TODO make remove child
-}
+//void dae::GameObject::SetParent(GameObject* pNewParent)
+//{
+//	m_pParent->RemoveChild(this);
+//
+//	m_pParent = pNewParent;
+//
+//	pNewParent->AddChild();
+//
+//	// TODO update position rotation and scale
+//}
+//
+//
+//void dae::GameObject::AddChild()
+//{
+//	m_pChildren.push_back(this);
+//}
+//
+//void dae::GameObject::RemoveChild(GameObject* /*pChild*/)
+//{
+//	// TODO make remove child
+//}

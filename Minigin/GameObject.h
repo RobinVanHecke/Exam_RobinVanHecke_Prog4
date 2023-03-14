@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <typeindex>
 
-#include "ComponentBase.h"
+#include "Component.h"
 
 namespace dae
 {
@@ -25,10 +25,10 @@ namespace dae
 		void SetDeleted(bool deleted);
 		bool GetDeleted() const;
 
-		void SetParent(GameObject* pNewParent);
+//		void SetParent(GameObject* pNewParent);
 
-		GameObject() = default;
-		~GameObject();
+		GameObject();
+		~GameObject() = default;
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
@@ -39,41 +39,40 @@ namespace dae
 	private:
 		bool m_Deleted{ false };
 
-		std::unordered_map<std::type_index, ComponentBase*> m_Components;
+		std::unordered_map<std::type_index, std::unique_ptr<Component>> m_pComponents;
 
-		GameObject* m_pParent{ nullptr };
-		std::vector<GameObject*> m_pChildren{ nullptr };
-
-		void AddChild();
-		void RemoveChild(GameObject* pChild);
+//		GameObject* m_pParent{ nullptr };
+//		std::vector<GameObject*> m_pChildren{ nullptr };
+//
+//		void AddChild();
+//		void RemoveChild(GameObject* pChild);
 	};
 
 	template <typename Comp>
 	Comp* GameObject::AddComponent()
 	{
-		m_Components.emplace(typeid(Comp), new Comp{ this });
+		static_assert(std::is_base_of_v<Component, Comp>, "Comp must derive from Component");
 
-		return dynamic_cast<Comp*>(m_Components.at(typeid(Comp)));
+		m_pComponents.emplace(typeid(Comp), std::make_unique<Comp>(this));
+
+		return dynamic_cast<Comp*>(m_pComponents.at(typeid(Comp)).get());
 	}
 
 	template <typename Comp>
 	Comp* GameObject::GetComponent() const
 	{
-		static_assert(std::is_base_of_v<ComponentBase, Comp>, "Component must derive from ComponentBase");
+		static_assert(std::is_base_of_v<Component, Comp>, "Comp must derive from ComponentBase");
 
-		const auto it = m_Components.find(typeid(Comp));
+		if (const auto it = m_pComponents.find(typeid(Comp)); it != m_pComponents.end())
+			return dynamic_cast<Comp*>(it->second.get());
 
-		if (it != m_Components.end())
-		{
-			return dynamic_cast<Comp*>(it->second);
-		}
 		return nullptr;
 	}
 
 	template <typename Comp>
 	void GameObject::RemoveComponent()
 	{
-		delete m_Components.at(typeid(Comp));
-		m_Components.erase(typeid(Comp));
+		if (const auto it = m_pComponents.find(typeid(Comp)); it != m_pComponents.end())
+			m_pComponents.erase(it);
 	}
 }

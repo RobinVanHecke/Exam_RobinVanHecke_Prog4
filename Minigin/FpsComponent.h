@@ -1,9 +1,9 @@
 #pragma once
 #include <string>
 
-#include "ComponentBase.h"
+#include "Component.h"
 
-class FpsComponent final : public ComponentBase
+class FpsComponent final : public Component
 {
 public:
 	FpsComponent(dae::GameObject* gameObject);

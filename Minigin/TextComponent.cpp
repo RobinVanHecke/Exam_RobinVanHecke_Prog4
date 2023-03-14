@@ -12,7 +12,7 @@
 class TextureComponent;
 
 TextComponent::TextComponent(dae::GameObject* gameObject):
-ComponentBase(gameObject)
+Component(gameObject)
 {
 }
 
@@ -22,9 +22,9 @@ void TextComponent::SetText(const std::string& text)
 	m_NeedsUpdate = true;
 }
 
-void TextComponent::SetFont(const std::shared_ptr<dae::Font>& font)
+void TextComponent::SetFont(const std::shared_ptr<dae::Font>& pFont)
 {
-	m_Font = font;
+	m_pFont = pFont;
 }
 
 void TextComponent::Update(float /*deltaT*/)
@@ -32,7 +32,7 @@ void TextComponent::Update(float /*deltaT*/)
 	if (m_NeedsUpdate)
 	{
 		constexpr SDL_Color color = { 255,255,255 }; // only white text is supported now
-		const auto surf = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), color);
+		const auto surf = TTF_RenderText_Blended(m_pFont->GetFont(), m_Text.c_str(), color);
 
 		if (surf == nullptr)
 		{
@@ -50,7 +50,7 @@ void TextComponent::Update(float /*deltaT*/)
 
 		if (!m_Text.empty())
 		{
-			GetOwner()->GetComponent<TextureComponent>()->SetTexture(std::make_shared<dae::Texture2D>(texture));
+			GetOwner()->GetComponent<TextureComponent>()->SetTexture(std::make_unique<dae::Texture2D>(texture));
 		}
 
 		m_NeedsUpdate = false;

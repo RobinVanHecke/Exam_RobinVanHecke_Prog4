@@ -1,7 +1,7 @@
 #include "TransformComponent.h"
 
 TransformComponent::TransformComponent(dae::GameObject* gameObject) :
-	ComponentBase(gameObject)
+	Component(gameObject)
 {
 }
 

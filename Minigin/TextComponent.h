@@ -2,7 +2,7 @@
 #include <memory>
 #include <string>
 
-#include "ComponentBase.h"
+#include "Component.h"
 
 namespace dae
 {
@@ -11,13 +11,13 @@ namespace dae
 }
 
 
-class TextComponent final : public ComponentBase
+class TextComponent final : public Component
 {
 public:
-	TextComponent(dae::GameObject* gameObject);
+	explicit TextComponent(dae::GameObject* gameObject);
 
 	void SetText(const std::string& text);
-	void SetFont(const std::shared_ptr<dae::Font>& font);
+	void SetFont(const std::shared_ptr<dae::Font>& pFont);
 
 	void Update(float /*deltaT*/) override;
 
@@ -26,7 +26,7 @@ private:
 	bool m_NeedsUpdate{ false };
 
 	std::string m_Text;
-	std::shared_ptr<dae::Font> m_Font;
+	std::shared_ptr<dae::Font> m_pFont;
 
 };
 

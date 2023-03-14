@@ -2,7 +2,7 @@
 #include <memory>
 #include <glm/vec3.hpp>
 
-#include "ComponentBase.h"
+#include "Component.h"
 
 
 namespace dae
@@ -13,17 +13,17 @@ namespace dae
 class TransformComponent;
 class TextureComponent;
 
-class RenderComponent final : public ComponentBase
+class RenderComponent final : public Component
 {
 public:
-	RenderComponent(dae::GameObject* gameObject);
+	explicit RenderComponent(dae::GameObject* gameObject);
 
 	void Render() const override;
 private:
-	std::shared_ptr<TextureComponent> m_pTexture{ nullptr };
+	TextureComponent* m_pTexture{ nullptr };
 	std::shared_ptr<dae::Texture2D> m_pTexture2D{ nullptr };
 
 
-	std::shared_ptr <TransformComponent> m_pTransform{ nullptr };
+	TransformComponent* m_pTransform{ nullptr };
 	glm::vec3 m_Position{ 0.f,0.f,0.f };
 };

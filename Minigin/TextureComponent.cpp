@@ -4,7 +4,7 @@
 #include "Texture2D.h"
 
 TextureComponent::TextureComponent(dae::GameObject* gameObject) :
-	ComponentBase(gameObject)
+	Component(gameObject)
 {
 }
 

@@ -6,9 +6,8 @@
 class TextComponent;
 
 FpsComponent::FpsComponent(dae::GameObject* gameObject):
-ComponentBase(gameObject)
-{
-}
+Component(gameObject)
+{}
 
 void FpsComponent::Update(const float deltaT)
 {

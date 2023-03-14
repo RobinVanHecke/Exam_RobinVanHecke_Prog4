@@ -2,14 +2,14 @@
 #include <memory>
 #include <string>
 
-#include "ComponentBase.h"
+#include "Component.h"
 
 namespace dae
 {
 	class Texture2D;
 }
 
-class TextureComponent final : public ComponentBase
+class TextureComponent final : public Component
 {
 public:
 	TextureComponent(dae::GameObject* gameObject);
