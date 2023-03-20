@@ -9,8 +9,8 @@ void dae::GameObject::Update(const float deltaT)
 		pComponent.second->Update(deltaT);
 
 	// TODO Update Children
-//	for (auto& pChild : m_pChildren)
-//		pChild->Update(deltaT);
+	for (auto& pChild : m_pChildren)
+		pChild->Update(deltaT);
 	
 }
 
@@ -21,8 +21,8 @@ void dae::GameObject::Render() const
 		pComponent.second->Render();
 
 	// TODO Render Children
-//	for (auto& pChild : m_pChildren)
-//		pChild->Render();
+	for (auto& pChild : m_pChildren)
+		pChild->Render();
 }
 
 void dae::GameObject::SetDeleted(const bool deleted)
