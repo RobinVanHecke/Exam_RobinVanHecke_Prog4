@@ -12,6 +12,7 @@ namespace dae
 	class GameObject final
 	{
 	public:
+
 		template<typename Comp> Comp* AddComponent();
 		template<typename Comp> Comp* GetComponent() const;
 		template<typename Comp> void RemoveComponent();
@@ -23,10 +24,10 @@ namespace dae
 		bool GetDeleted() const;
 
 		void SetParent(GameObject* pNewParent);
-		const std::vector<dae::GameObject*>& GetChildren() const { return m_pChildren; }
+		const std::vector<std::unique_ptr<GameObject>>& GetChildren() const { return m_pChildren; }
 
 		GameObject();
-		~GameObject();
+		~GameObject() = default;
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
@@ -38,10 +39,10 @@ namespace dae
 		std::unordered_map<std::type_index, std::unique_ptr<Component>> m_pComponents;
 
 		GameObject* m_pParent{ nullptr };
-		std::vector<GameObject*> m_pChildren{};
+		std::vector<std::unique_ptr<GameObject>> m_pChildren{};
 
 		void AddChild(GameObject* pChild);
-		void RemoveChild(const GameObject* pChild);
+		void RemoveChild(GameObject* pChild);
 	};
 
 	template <typename Comp>

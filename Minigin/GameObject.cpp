@@ -1,26 +1,25 @@
 #include "GameObject.h"
 
+#include <ranges>
+
 #include "TransformComponent.h"
 
 void dae::GameObject::Update(const float deltaT)
 {
 	// Update components
-	for (auto& pComponent : m_pComponents)
-		pComponent.second->Update(deltaT);
+	for (const auto& pCompValue : m_pComponents | std::views::values)
+		pCompValue->Update(deltaT);
 
-	// TODO Update Children
-	for (auto& pChild : m_pChildren)
+	for (const auto& pChild : m_pChildren)
 		pChild->Update(deltaT);
-	
 }
 
 void dae::GameObject::Render() const
 {
 	// Render components
-	for (const auto& pComponent: m_pComponents)
-		pComponent.second->Render();
+	for (const auto& pCompValue : m_pComponents | std::views::values)
+		pCompValue->Render();
 
-	// TODO Render Children
 	for (auto& pChild : m_pChildren)
 		pChild->Render();
 }
@@ -37,14 +36,8 @@ bool dae::GameObject::GetDeleted() const
 
 dae::GameObject::GameObject()
 {
-	// GameObject always has a Transform Component
+	// GameObject always has a Transform Component by default
 	AddComponent<TransformComponent>()->SetPosition(0.f,0.f);
-}
-
-dae::GameObject::~GameObject()
-{
-	for (const auto& pChild : m_pChildren)
-		delete pChild;
 }
 
 void dae::GameObject::SetParent(GameObject* pNewParent)
@@ -91,14 +84,17 @@ void dae::GameObject::SetParent(GameObject* pNewParent)
 
 void dae::GameObject::AddChild(GameObject* pChild)
 {
-	m_pChildren.push_back(pChild);
+	m_pChildren.push_back(std::unique_ptr<GameObject>(pChild));
 }
 
-void dae::GameObject::RemoveChild(const GameObject* pChild)
+void dae::GameObject::RemoveChild(GameObject* pChild)
 {
-	if (const auto it = std::find(m_pChildren.begin(), m_pChildren.end(), pChild); 
-		it != m_pChildren.end())
+	auto it = std::ranges::find_if(m_pChildren,[pChild](const std::unique_ptr<GameObject>& c)
+		{ return c.get() == pChild; });
+
+	if (it != m_pChildren.end())
 	{
+		(*it)->m_pParent = nullptr;
 		m_pChildren.erase(it);
 	}
 }
