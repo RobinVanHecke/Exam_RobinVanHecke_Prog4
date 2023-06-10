@@ -16,7 +16,7 @@ RenderComponent::RenderComponent(dae::GameObject* gameObject) :
 	if (GetOwner()->GetComponent<TransformComponent>() != nullptr)
 	{
 		m_pTransform = GetOwner()->GetComponent<TransformComponent>();
-		m_Position = m_pTransform->GetPosition();
+		m_Position = m_pTransform->GetWorldPosition();
 	}
 }
 

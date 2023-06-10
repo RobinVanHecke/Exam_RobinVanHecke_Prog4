@@ -1,5 +1,5 @@
 #pragma once
-#include <glm/vec3.hpp>
+#include <glm/vec2.hpp>
 
 #include "Component.h"
 
@@ -7,21 +7,52 @@ class TransformComponent final : public Component
 {
 public:
 	explicit TransformComponent(dae::GameObject* gameObject);
+	~TransformComponent() = default;
 
-	void SetPosition(glm::vec3 newPos);
-	void SetPosition(float newX, float newY, float newZ = 0.f);
-	glm::vec3 GetPosition() const { return m_Position; }
+#pragma region world
+	void SetWorldPosition(const glm::vec2& newPos) { SetWorldPosition(newPos.x, newPos.y); }
+	void SetWorldPosition(float newXPos, float newYPos);
+	const glm::vec2& GetWorldPosition();
 
-	void SetRotation(glm::vec3 newRotation);
-	void SetRotation(float newX, float newY, float newZ = 0.f);
-	glm::vec3 GetRotation() const { return m_Rotation; }
+	void SetWorldRotation(float newRotation, bool degrees = true);
+	float GetWorldRotation(bool degrees = true);
 
-	void SetScale(glm::vec3 newScale);
-	void SetScale(float newX, float newY, float newZ = 0.f);
-	glm::vec3 GetScale() const { return m_Scale; }
+	void SetWorldScale(const glm::vec2& newScale) { SetWorldScale(newScale.x, newScale.y); }
+	void SetWorldScale(float newXScale, float newYScale);
+	glm::vec2 GetWorldScale();
+#pragma endregion
+
+#pragma region local
+	void SetLocalPos(const glm::vec2& newPos) { SetLocalPos(newPos.x, newPos.y); }
+	void SetLocalPos(float newXPos, float newYPos);
+	glm::vec2 GetLocalPos() const { return m_LocalPosition; }
+
+	void SetLocalRotation(float newRotation, bool degrees = true);
+	float GetLocalRotation(bool degrees = true) const;
+
+	void SetLocalScale(const glm::vec2& newScale) { SetLocalScale(newScale.x, newScale.y); }
+	void SetLocalScale(float newXScale, float newYScale);
+	glm::vec2 GetLocalScale() const { return m_LocalScale; }
+#pragma endregion
+
+	bool IsDirty() const { return m_DirtyFlag; }
+	void SetDirty();
+
+	void Translate(const glm::vec2& xy) { Translate(xy.x, xy.y); }
+	void Translate(float x, float y);
+
+	void Rotate(float angle, bool degrees);
 
 private:
-	glm::vec3 m_Position{};
-	glm::vec3 m_Rotation{};
-	glm::vec3 m_Scale{};
+	void UpdateTransform();
+
+	glm::vec2 m_WorldPosition{};
+	float m_WorldRotation{};
+	glm::vec2 m_WorldScale{};
+
+	glm::vec2 m_LocalPosition{};
+	float m_LocalRotation{};
+	glm::vec2 m_LocalScale{};
+
+	bool m_DirtyFlag{};
 };

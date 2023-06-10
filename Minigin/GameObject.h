@@ -26,6 +26,8 @@ namespace dae
 		void SetParent(GameObject* pNewParent);
 		const std::vector<std::unique_ptr<GameObject>>& GetChildren() const { return m_pChildren; }
 
+		GameObject* GetParent() const { return m_pParent; }
+
 		GameObject();
 		~GameObject() = default;
 		GameObject(const GameObject& other) = delete;

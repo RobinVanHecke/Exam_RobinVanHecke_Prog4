@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <glm/vec3.hpp>
+#include <glm/vec2.hpp>
 
 #include "Component.h"
 
@@ -25,5 +25,5 @@ private:
 
 
 	TransformComponent* m_pTransform{ nullptr };
-	glm::vec3 m_Position{ 0.f,0.f,0.f };
+	glm::vec2 m_Position{ 0.f,0.f };
 };

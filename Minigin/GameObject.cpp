@@ -37,7 +37,7 @@ bool dae::GameObject::GetDeleted() const
 dae::GameObject::GameObject()
 {
 	// GameObject always has a Transform Component by default
-	AddComponent<TransformComponent>()->SetPosition(0.f,0.f);
+	AddComponent<TransformComponent>()->SetWorldPosition(0.f,0.f);
 }
 
 void dae::GameObject::SetParent(GameObject* pNewParent)
@@ -59,25 +59,25 @@ void dae::GameObject::SetParent(GameObject* pNewParent)
 
 	if (const auto transform = GetComponent<TransformComponent>())
 	{
-		const auto oldPosition = transform->GetPosition();
-		const auto oldRotation = transform->GetRotation();
-		const auto oldScale = transform->GetScale();
+		const auto oldPosition = transform->GetWorldPosition();
+		const auto oldRotation = transform->GetWorldRotation();
+		const auto oldScale = transform->GetWorldScale();
 
 		if (m_pParent)
 		{
 			if (const auto parentTransform = m_pParent->GetComponent<TransformComponent>())
 			{
-				transform->SetPosition(oldPosition + parentTransform->GetPosition());
-				transform->SetRotation(oldRotation + parentTransform->GetRotation());
-				transform->SetScale(oldScale + parentTransform->GetScale());
+				transform->SetWorldPosition(oldPosition + parentTransform->GetWorldPosition());
+				transform->SetWorldRotation(oldRotation + parentTransform->GetWorldRotation());
+				transform->SetWorldScale(oldScale + parentTransform->GetWorldScale());
 			}
 		}
 
 		else
 		{
-			transform->SetPosition(oldPosition);
-			transform->SetRotation(oldRotation);
-			transform->SetScale(oldScale);
+			transform->SetWorldPosition(oldPosition);
+			transform->SetWorldRotation(oldRotation);
+			transform->SetWorldScale(oldScale);
 		}
 	}
 }
