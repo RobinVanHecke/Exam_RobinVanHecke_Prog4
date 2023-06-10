@@ -1,5 +1,4 @@
 #include "FpsComponent.h"
-
 #include "GameObject.h"
 #include "TextComponent.h"
 
@@ -11,10 +10,9 @@ Component(gameObject)
 
 void FpsComponent::Update(const float deltaT)
 {
-	m_Fps = 1 / deltaT;
+	float fps = 1 / deltaT;
+	fps = floor(fps);
 
-	m_Fps = floor(m_Fps);
-
-	m_FpsString = std::to_string(static_cast<int>(m_Fps));
-	GetOwner()->GetComponent<TextComponent>()->SetText(m_FpsString);
+	const std::string fpsString = std::to_string(static_cast<int>(fps));
+	GetOwner()->GetComponent<TextComponent>()->SetText(fpsString);
 }
