@@ -16,12 +16,11 @@ RenderComponent::RenderComponent(dae::GameObject* gameObject) :
 	if (GetOwner()->GetComponent<TransformComponent>() != nullptr)
 	{
 		m_pTransform = GetOwner()->GetComponent<TransformComponent>();
-		m_Position = m_pTransform->GetWorldPosition();
 	}
 }
 
 void RenderComponent::Render() const
 {
 	if (m_pTexture != nullptr)
-		dae::Renderer::GetInstance().RenderTexture(*m_pTexture->GetTexture(), m_Position.x, m_Position.y);
+		dae::Renderer::GetInstance().RenderTexture(*m_pTexture->GetTexture(), m_pTransform->GetWorldPosition().x, m_pTransform->GetWorldPosition().y);
 }

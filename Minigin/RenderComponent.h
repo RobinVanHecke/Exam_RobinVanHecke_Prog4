@@ -1,9 +1,6 @@
 #pragma once
 #include <memory>
-#include <glm/vec2.hpp>
-
 #include "Component.h"
-
 
 namespace dae
 {
@@ -25,5 +22,4 @@ private:
 
 
 	TransformComponent* m_pTransform{ nullptr };
-	glm::vec2 m_Position{ 0.f,0.f };
 };

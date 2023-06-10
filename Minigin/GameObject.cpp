@@ -42,9 +42,39 @@ dae::GameObject::GameObject()
 
 void dae::GameObject::SetParent(GameObject* pNewParent)
 {
-	// if new parent is same as current parent
-	if (m_pParent == pNewParent) 
+	if (const auto pOldParent = m_pParent)
+	{
+		// if new parent is same as current parent
+		if (pOldParent == pNewParent)
+			return;
+
+		// remove from children
+		pOldParent->RemoveChild(this);
+	}
+
+	else
+	{
+		if (!pNewParent)
+			return;
+
+		pNewParent->AddChild(this);
+	}
+
+	m_pParent = pNewParent;
+
+	const auto pTransform = GetComponent<TransformComponent>();
+	if (!pTransform)
 		return;
+
+	if (pNewParent)
+	{
+		if (const auto pNewParentTransform = pNewParent->GetComponent<TransformComponent>())
+			pTransform->SetLocalPosition(pTransform->GetWorldPosition() - pNewParentTransform->GetWorldPosition());
+	}
+	else
+		pTransform->SetLocalPosition(pTransform->GetWorldPosition());
+
+	/*
 
 	// remove from children 
 	if (m_pParent)
@@ -80,6 +110,7 @@ void dae::GameObject::SetParent(GameObject* pNewParent)
 			transform->SetWorldScale(oldScale);
 		}
 	}
+	*/
 }
 
 void dae::GameObject::AddChild(GameObject* pChild)

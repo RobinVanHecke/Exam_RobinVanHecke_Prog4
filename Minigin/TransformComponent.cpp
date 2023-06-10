@@ -90,7 +90,7 @@ glm::vec2 TransformComponent::GetWorldScale()
 #pragma endregion
 
 #pragma region local
-void TransformComponent::SetLocalPos(const float newXPos, const float newYPos)
+void TransformComponent::SetLocalPosition(const float newXPos, const float newYPos)
 {
 	m_LocalPosition.x = newXPos;
 	m_LocalPosition.y = newYPos;

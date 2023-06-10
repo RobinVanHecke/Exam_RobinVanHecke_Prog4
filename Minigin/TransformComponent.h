@@ -23,8 +23,8 @@ public:
 #pragma endregion
 
 #pragma region local
-	void SetLocalPos(const glm::vec2& newPos) { SetLocalPos(newPos.x, newPos.y); }
-	void SetLocalPos(float newXPos, float newYPos);
+	void SetLocalPosition(const glm::vec2& newPos) { SetLocalPosition(newPos.x, newPos.y); }
+	void SetLocalPosition(float newXPos, float newYPos);
 	glm::vec2 GetLocalPos() const { return m_LocalPosition; }
 
 	void SetLocalRotation(float newRotation, bool degrees = true);
