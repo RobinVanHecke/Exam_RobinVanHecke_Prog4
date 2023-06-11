@@ -5,11 +5,11 @@
 
 namespace dae
 {
-	class ThumbstickCommand: public Command
+	class ThumbCommand: public Command
 	{
 	public:
-		ThumbstickCommand() = default;
-		~ThumbstickCommand() override = default;
+		ThumbCommand() = default;
+		~ThumbCommand() override = default;
 
 		void Execute() override = 0;
 		void SetDirection(const glm::vec2& direction) { m_Direction = direction; }

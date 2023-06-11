@@ -96,7 +96,7 @@
     <ClInclude Include="Command.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="ThumbstickCommand.h">
+    <ClInclude Include="ThumbCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
