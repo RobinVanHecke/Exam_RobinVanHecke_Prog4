@@ -26,6 +26,7 @@ namespace dae
 		CollidedObjects(GameObject* pObject, GameObject* pOtherObject) : m_pObject(pObject), m_pOtherObject(pOtherObject)
 		{}
 
-		GameObject* m_pObject{ nullptr },* m_pOtherObject{ nullptr };
+		GameObject * m_pObject{ nullptr };
+		GameObject * m_pOtherObject{ nullptr };
 	};
 }

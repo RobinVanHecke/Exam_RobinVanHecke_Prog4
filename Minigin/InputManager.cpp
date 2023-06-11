@@ -54,7 +54,7 @@ void dae::InputManager::ControllerInput() const
 void dae::InputManager::KeyboardInput()
 {
 	memcpy(m_PreviousKeyState, m_CurrentKeyState, sizeof m_PreviousKeyState);
-	GetKeyboardState(m_CurrentKeyState);
+	//GetKeyboardState(m_CurrentKeyState);
 
 	for (const auto & [keyState, command] : m_pKeyboardCommands)
 	{

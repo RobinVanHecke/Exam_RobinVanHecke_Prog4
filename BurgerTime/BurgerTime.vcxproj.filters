@@ -28,6 +28,9 @@
     <Filter Include="Events">
       <UniqueIdentifier>{47c9f7d3-32c0-45f7-89c7-20dc06b28380}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{5d17c0d5-738e-4a78-81fd-b96f653c27bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BurgerTime.cpp">
@@ -57,6 +60,12 @@
     <ClCompile Include="BurgerComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerPrefab.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveCommand.h">
@@ -85,6 +94,15 @@
     </ClInclude>
     <ClInclude Include="Events.h">
       <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPrefab.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCell.h">
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

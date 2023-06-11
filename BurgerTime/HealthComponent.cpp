@@ -1,5 +1,6 @@
 #include "HealthComponent.h"
 
+#include "CollisionManager.h"
 #include "EngineEvents.h"
 #include "Events.h"
 #include "GameObject.h"
@@ -14,7 +15,13 @@ void HealthComponent::OnEvent(std::any data, int id, const bool engineEvent)
 
 	if (id == static_cast<int>(dae::EngineEvents::CollisionEvent))
 	{
-		
+		const auto collidedObjects = std::any_cast<dae::CollidedObjects>(data);
+
+		if (collidedObjects.m_pObject != GetOwner())
+			return;
+
+		//TODO burger
+		//auto
 	}
 }
 

@@ -1,7 +1,6 @@
 #include "CollisionComponent.h"
 
 #include "CollisionManager.h"
-#include "TransformComponent.h"
 
 CollisionComponent::~CollisionComponent()
 {

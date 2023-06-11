@@ -23,24 +23,28 @@
 #include "ButtonComponent.h"
 #include "SoundCommand.h"
 
-#include "Renderer.h"
 #include "InputManager.h"
 #include "SoundSystem.h"
 
 void load()
 {
-	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
+	auto& scene = dae::SceneManager::GetInstance().CreateScene("MainMenu");
 	const auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 
 	// In Engine
-	const float windowWidth = 416.f;
-
+	constexpr float windowWidth = 416.f;
 
 	// SOUND
 	auto pSoundSystem = new dae::SoundSystem();
 	pSoundSystem->AddSound("../Data/Sounds/01_Start.wav");
 	auto soundCommand = std::make_unique<SoundCommand>(pSoundSystem);
 	dae::InputManager::GetInstance().AddCommand(std::move(soundCommand), dae::KeyState::Pressed, dae::InputManager::Key::P);
+
+	// BACKGROUND
+	//const auto goBackground = std::make_shared<dae::GameObject>();
+	//goBackground->AddComponent<TextureComponent>()->SetTexture("../Data/Textures/Level1.png");
+	//goBackground->AddComponent<RenderComponent>();
+	//scene.Add(goBackground);
 
 	// LOGO
 	const auto goLogo = std::make_shared<dae::GameObject>();

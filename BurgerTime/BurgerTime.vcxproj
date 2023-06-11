@@ -155,9 +155,11 @@
     <ClCompile Include="BurgerComponent.cpp" />
     <ClCompile Include="BurgerTime.cpp" />
     <ClCompile Include="DamageComponent.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="PlayerPrefab.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="SoundCommand.cpp" />
   </ItemGroup>
@@ -166,9 +168,12 @@
     <ClInclude Include="BurgerComponent.h" />
     <ClInclude Include="DamageComponent.h" />
     <ClInclude Include="Events.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="GridCell.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="PlayerPrefab.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="SoundCommand.h" />
   </ItemGroup>
