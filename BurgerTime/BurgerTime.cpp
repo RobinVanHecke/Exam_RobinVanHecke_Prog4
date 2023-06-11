@@ -38,20 +38,13 @@ void load()
 
 	// SOUND
 	auto pSoundSystem = new dae::SoundSystem();
-	pSoundSystem->AddSound("../Data/LoseLife.wav");
+	pSoundSystem->AddSound("../Data/Sounds/01_Start.wav");
 	auto soundCommand = std::make_unique<SoundCommand>(pSoundSystem);
 	dae::InputManager::GetInstance().AddCommand(std::move(soundCommand), dae::KeyState::Pressed, dae::InputManager::Key::P);
 
-
-	// BACKGROUND
-	const auto goBackground = std::make_shared<dae::GameObject>();
-	goBackground->AddComponent<TextureComponent>()->SetTexture("background.tga");
-	goBackground->AddComponent<RenderComponent>();
-	scene.Add(goBackground);
-
 	// LOGO
 	const auto goLogo = std::make_shared<dae::GameObject>();
-	goLogo->AddComponent<TextureComponent>()->SetTexture("Logo.png");
+	goLogo->AddComponent<TextureComponent>()->SetTexture("../Data/Textures/Logo.png");
 	const auto logoSize = goLogo->GetComponent<TextureComponent>()->GetSize();
 	goLogo->GetComponent<TransformComponent>()->SetLocalPosition(windowWidth / 2.f - static_cast<float>(logoSize.x) / 2.f, 0.f);
 	goLogo->AddComponent<RenderComponent>();

@@ -2,8 +2,7 @@
 
 SoundCommand::SoundCommand(dae::BaseSoundSystem* pSoundSystem) : m_pSoundSystem(pSoundSystem)
 {
-	dae::ServiceLocator::RegisterSoundSystem(std::unique_ptr<dae::BaseSoundSystem>(pSoundSystem));
-
+	dae::ServiceLocator::RegisterSoundSystem(std::move(m_pSoundSystem));
 }
 
 void SoundCommand::Execute()
