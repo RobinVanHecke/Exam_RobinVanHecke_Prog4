@@ -63,6 +63,7 @@ void load()
 	goSingle->AddComponent<TextureComponent>();
 	goSingle->AddComponent<TextComponent>()->SetText("Single Player");
 	goSingle->GetComponent<TextComponent>()->SetFont(font);
+	goSingle->GetComponent<TextComponent>()->MakeTexture();
 	auto SingleClick = [&]
 	{
 		dae::InputManager::GetInstance().RemoveButtons();
@@ -81,6 +82,7 @@ void load()
 	goCoop->AddComponent<TextureComponent>();
 	goCoop->AddComponent<TextComponent>()->SetText("CO-OP");
 	goCoop->GetComponent<TextComponent>()->SetFont(font);
+	goCoop->GetComponent<TextComponent>()->MakeTexture();
 	auto coopClick = [&]
 	{
 		dae::InputManager::GetInstance().RemoveButtons();
@@ -99,6 +101,7 @@ void load()
 	goVersus->AddComponent<TextureComponent>();
 	goVersus->AddComponent<TextComponent>()->SetText("Versus");
 	goVersus->GetComponent<TextComponent>()->SetFont(font);
+	goCoop->GetComponent<TextComponent>()->MakeTexture();
 	auto versusClick = [&]
 	{
 		dae::InputManager::GetInstance().RemoveButtons();
@@ -107,7 +110,7 @@ void load()
 	};
 	const auto versusSize = goCoop->GetComponent<TextComponent>()->GetSize();
 	const glm::vec2 versusPos{ windowWidth / 2.f - static_cast<float>(versusSize.x) / 2.f, 350.f };
-	goVersus->AddComponent<ButtonComponent>()->Setup(singlePos, static_cast<float>(versusSize.x), 24, versusClick);
+	goVersus->AddComponent<ButtonComponent>()->Setup(singlePos, static_cast<float>(versusSize.x), static_cast<float>(versusSize.y), versusClick);
 	goVersus->GetComponent<TransformComponent>()->SetLocalPosition(versusPos.x, versusPos.y);
 	goVersus->AddComponent<RenderComponent>();
 	scene.Add(goVersus);

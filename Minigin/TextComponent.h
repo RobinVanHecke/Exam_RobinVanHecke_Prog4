@@ -19,9 +19,10 @@ public:
 
 	void SetText(const std::string& text);
 	void SetFont(const std::shared_ptr<dae::Font>& pFont);
+	void MakeTexture();
 
 	void Update(float /*deltaT*/) override;
-	glm::ivec2 GetSize();
+	glm::ivec2 GetSize() const;
 
 
 private:

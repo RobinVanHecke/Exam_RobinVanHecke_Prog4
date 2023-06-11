@@ -1,5 +1,6 @@
 #include "TextComponent.h"
 
+#include <iostream>
 #include <SDL_pixels.h>
 #include <SDL_ttf.h>
 #include <stdexcept>
@@ -27,38 +28,43 @@ void TextComponent::SetFont(const std::shared_ptr<dae::Font>& pFont)
 	m_pFont = pFont;
 }
 
+void TextComponent::MakeTexture()
+{
+	constexpr SDL_Color color = { 255,255,255 }; // only white text is supported now
+	const auto surf = TTF_RenderText_Blended(m_pFont->GetFont(), m_Text.c_str(), color);
+
+	if (surf == nullptr)
+	{
+		throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
+	}
+
+	auto texture = SDL_CreateTextureFromSurface(dae::Renderer::GetInstance().GetSDLRenderer(), surf);
+
+	if (texture == nullptr)
+	{
+		throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
+	}
+
+	SDL_FreeSurface(surf);
+
+	if (!m_Text.empty())
+	{
+		GetOwner()->GetComponent<TextureComponent>()->SetTexture(std::make_unique<dae::Texture2D>(texture));
+		m_Size = GetOwner()->GetComponent<TextureComponent>()->GetSize();
+		//m_Size.y = static_cast<int>(m_pFont->GetSize());
+		//m_Size.x = static_cast<int>(m_Text.length()) * m_pFont->GetSize();
+	}
+
+	m_NeedsUpdate = false;
+}
+
 void TextComponent::Update(float /*deltaT*/)
 {
 	if (m_NeedsUpdate)
-	{
-		constexpr SDL_Color color = { 255,255,255 }; // only white text is supported now
-		const auto surf = TTF_RenderText_Blended(m_pFont->GetFont(), m_Text.c_str(), color);
-
-		if (surf == nullptr)
-		{
-			throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
-		}
-
-		auto texture = SDL_CreateTextureFromSurface(dae::Renderer::GetInstance().GetSDLRenderer(), surf);
-
-		if (texture == nullptr)
-		{
-			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
-		}
-
-		SDL_FreeSurface(surf);
-
-		if (!m_Text.empty())
-		{
-			GetOwner()->GetComponent<TextureComponent>()->SetTexture(std::make_unique<dae::Texture2D>(texture));
-			m_Size = GetOwner()->GetComponent<TextureComponent>()->GetSize();
-		}
-
-		m_NeedsUpdate = false;
-	}
+		MakeTexture();
 }
 
-glm::ivec2 TextComponent::GetSize()
+glm::ivec2 TextComponent::GetSize() const
 {
 	return m_Size;
 }
