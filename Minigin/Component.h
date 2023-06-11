@@ -27,6 +27,5 @@ protected:
 
 private:
 	dae::GameObject* m_pOwner{ nullptr };
-
 };
 

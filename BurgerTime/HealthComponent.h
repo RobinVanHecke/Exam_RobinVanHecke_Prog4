@@ -21,7 +21,7 @@ public:
 	void OnEvent(std::any data, int id, bool engineEvent) override;
 
 	void SetValues(int lives, bool player = true);
-	void SetValues(int lives, bool player = true, const glm::vec2& UIpos, const std::string& texturePath);
+	void SetValues(int lives, const glm::vec2& UIpos, const std::string& texturePath, bool player = true);
 
 	void Update(float deltaT) override;
 	void Damage(int lives, bool castEvent = true);

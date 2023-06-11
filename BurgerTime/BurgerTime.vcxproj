@@ -165,6 +165,7 @@
     <ClInclude Include="AiComponent.h" />
     <ClInclude Include="BurgerComponent.h" />
     <ClInclude Include="DamageComponent.h" />
+    <ClInclude Include="Events.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="MoveComponent.h" />

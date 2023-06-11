@@ -25,6 +25,9 @@
     <Filter Include="Prefabs">
       <UniqueIdentifier>{13c7343e-5294-43bc-88de-fcb671ec62ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{47c9f7d3-32c0-45f7-89c7-20dc06b28380}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BurgerTime.cpp">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="BurgerComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
