@@ -11,6 +11,7 @@ class Component
 public:
 	virtual void Update(float /*deltaT*/) {}
 	virtual void Render() const{}
+	virtual void OnGUI() {}
 
 	Component() = default;
 	explicit Component(dae::GameObject* gameObject): m_pOwner( gameObject) {}

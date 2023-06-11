@@ -24,6 +24,16 @@ void dae::GameObject::Render() const
 		pChild->Render();
 }
 
+void dae::GameObject::OnGUI()
+{
+	for (const auto& pComponent : m_pComponents | std::views::values)
+		pComponent->OnGUI();
+
+	for (const auto & pChild : m_pChildren)
+		pChild->OnGUI();
+	
+}
+
 void dae::GameObject::SetDeleted(const bool deleted)
 {
 	m_Deleted = deleted;

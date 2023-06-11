@@ -3,23 +3,23 @@
 
 namespace dae
 {
+	enum class KeyState;
+
 	class Controller final
 	{
-		class ControllerImplementation;
-		std::unique_ptr<ControllerImplementation> m_pImplementation;
-
 	public:
-		Controller(unsigned int index);
-		~Controller() = default;
+		Controller();
+		explicit Controller(int index);
 
-		void Update() const;
-		void SetDeadZone(float percentage) const;
+		~Controller();
+		Controller(const Controller& other) = delete;
+		Controller(Controller&& other) = default;
+		Controller& operator=(const Controller& other) = delete;
+		Controller& operator=(Controller&& other) = delete;
 
-		bool OnButton(unsigned int button) const;
-		bool OnButtonUp(unsigned int button) const;
-		bool OnButtonDown(unsigned int button) const;
-		
-		float GetAxis(unsigned int thumbStick, bool x) const;
-		float GetAxis(unsigned int button) const;
+		enum class ControllerKey : unsigned int
+		{
+			
+		};
 	};
 }

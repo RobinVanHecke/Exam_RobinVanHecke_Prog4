@@ -19,6 +19,7 @@ namespace dae
 
 		void Update(float deltaT);
 		void Render() const;
+		void OnGUI();
 		
 		void SetDeleted(bool deleted);
 		bool GetDeleted() const;

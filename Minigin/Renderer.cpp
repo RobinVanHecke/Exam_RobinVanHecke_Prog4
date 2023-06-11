@@ -23,6 +23,12 @@ int GetOpenGLDriverIndex()
 
 void dae::Renderer::Init(SDL_Window* window)
 {
+	if (!window) 
+		return;
+
+	if (m_window)
+		Destroy();
+
 	m_window = window;
 	m_renderer = SDL_CreateRenderer(window, GetOpenGLDriverIndex(), SDL_RENDERER_ACCELERATED);
 	if (m_renderer == nullptr) 
@@ -48,24 +54,22 @@ void dae::Renderer::Render()
 	ImGui_ImplSDL2_NewFrame(m_window);
 	ImGui::NewFrame();
 
-	// TODO hint: something should come here
+	SceneManager::GetInstance().OnGUI();
 
-	if (m_ShowDemo)
-		ImGui::ShowDemoWindow(&m_ShowDemo);
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
-	
+
 	SDL_RenderPresent(m_renderer);
 }
 
 void dae::Renderer::Destroy()
 {
-	ImGui_ImplOpenGL2_Shutdown();
-	ImGui_ImplSDL2_Shutdown();
-	ImGui::DestroyContext();
-
 	if (m_renderer != nullptr)
 	{
+		ImGui_ImplOpenGL2_Shutdown();
+		ImGui_ImplSDL2_Shutdown();
+		ImGui::DestroyContext();
+
 		SDL_DestroyRenderer(m_renderer);
 		m_renderer = nullptr;
 	}

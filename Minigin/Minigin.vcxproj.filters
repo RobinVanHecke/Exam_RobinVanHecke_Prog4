@@ -19,12 +19,15 @@
     <Filter Include="Components">
       <UniqueIdentifier>{3682d653-47e3-49b0-9888-f7d3d5b4c891}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{e04562ea-b8d7-4c4b-bad0-ae1251c2809f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{d082b39c-ba75-4f88-9a4e-a6ffe7489810}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
@@ -33,16 +36,10 @@
     <ClInclude Include="Texture2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
@@ -97,32 +94,32 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
-      <Filter>Header Files</Filter>
+      <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="DataCommand.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ThumbstickCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Texture2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
@@ -175,6 +172,15 @@
     </ClCompile>
     <ClCompile Include="Controller.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

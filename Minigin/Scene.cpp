@@ -48,3 +48,9 @@ void Scene::Render() const
 	}
 }
 
+void Scene::OnGUI() const
+{
+	for (const auto & gameObject : m_objects)
+		gameObject->OnGUI();
+}
+
