@@ -42,7 +42,7 @@ void dae::EventQueue::RemoveListener(const EventListener* pObserver)
 		}
 }
 
-void dae::EventQueue::AddEvent(std::any pData, int id, bool engineEvent)
+void dae::EventQueue::AddEvent(const std::any& pData, int id, bool engineEvent)
 {
 	if ((m_Back + 1) % m_Size == m_Front)
 	{

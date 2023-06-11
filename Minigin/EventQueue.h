@@ -19,7 +19,7 @@ namespace dae
 		void AddListener(EventListener* pObserver) { m_pListeners.push_back(pObserver); }
 		void RemoveListener(const EventListener* pObserver);
 
-		void AddEvent(std::any pData, int id, bool engineEvent);
+		void AddEvent(const std::any& pData, int id, bool engineEvent);
 
 	private:
 		std::vector<EventListener*> m_pListeners{};
