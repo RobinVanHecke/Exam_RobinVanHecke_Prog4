@@ -11,6 +11,7 @@ namespace dae
 	{
 	public:
 		Scene& CreateScene(const std::string& name);
+		Scene* GetScene(int index) const;
 
 		void Update(float deltaT);
 		void Render();

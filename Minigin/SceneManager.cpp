@@ -30,3 +30,11 @@ dae::Scene& dae::SceneManager::CreateScene(const std::string& name)
 	m_scenes.push_back(scene);
 	return *scene;
 }
+
+dae::Scene* dae::SceneManager::GetScene(const int index) const
+{
+	if (static_cast<int>(m_scenes.size()) <= index)
+		return nullptr;
+
+	return m_scenes[index].get();
+}
