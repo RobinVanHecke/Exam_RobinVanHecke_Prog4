@@ -2,5 +2,5 @@
 
 namespace dae
 {
-	BaseSoundSystem* ServiceLocator::m_pSoundSystem{ new DefaultSoundSystem };
+	std::unique_ptr<BaseSoundSystem> ServiceLocator::m_pSoundSystem{ new DefaultSoundSystem };
 }

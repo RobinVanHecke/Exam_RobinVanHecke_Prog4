@@ -67,7 +67,7 @@ namespace dae
 			m_Condition.notify_all();
 		}
 
-		void PlaySound(const unsigned short id, const int volume)
+		void PlaySound(const unsigned short id, const int volume) const
 		{
 			if (static_cast<unsigned long long>(id) > m_pSounds.size())
 			{

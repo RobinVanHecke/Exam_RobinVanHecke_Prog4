@@ -7,74 +7,110 @@
 #endif
 #endif
 
+#include <iostream>
+
 #include "Minigin.h"
 #include "SceneManager.h"
 #include "ResourceManager.h"
 #include "Scene.h"
 
 #include "GameObject.h"
+
 #include "TextComponent.h"
 #include "TransformComponent.h"
 #include "RenderComponent.h"
 #include "TextureComponent.h"
-#include "FpsComponent.h"
+#include "ButtonComponent.h"
+#include "SoundCommand.h"
+
+#include "Renderer.h"
+#include "InputManager.h"
+#include "SoundSystem.h"
 
 void load()
 {
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
-	const auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
+	const auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 
+	// In Engine
+	const float windowWidth = 416.f;
+
+
+	// SOUND
+	auto pSoundSystem = new dae::SoundSystem();
+	pSoundSystem->AddSound("../Data/LoseLife.wav");
+	auto soundCommand = std::make_unique<SoundCommand>(pSoundSystem);
+	dae::InputManager::GetInstance().AddCommand(std::move(soundCommand), dae::KeyState::Pressed, dae::InputManager::Key::P);
+
+
+	// BACKGROUND
 	const auto goBackground = std::make_shared<dae::GameObject>();
 	goBackground->AddComponent<TextureComponent>()->SetTexture("background.tga");
 	goBackground->AddComponent<RenderComponent>();
 	scene.Add(goBackground);
 
+	// LOGO
 	const auto goLogo = std::make_shared<dae::GameObject>();
-	goLogo->AddComponent<TextureComponent>()->SetTexture("logo.tga");
-	goLogo->GetComponent<TransformComponent>()->SetWorldPosition(216.f, 180.f);
+	goLogo->AddComponent<TextureComponent>()->SetTexture("Logo.png");
+	const auto logoSize = goLogo->GetComponent<TextureComponent>()->GetSize();
+	goLogo->GetComponent<TransformComponent>()->SetLocalPosition(windowWidth / 2.f - static_cast<float>(logoSize.x) / 2.f, 0.f);
 	goLogo->AddComponent<RenderComponent>();
 	scene.Add(goLogo);
 
-	const auto goTitle = std::make_shared<dae::GameObject>();
-	goTitle->AddComponent<TextComponent>()->SetText("Programming 4 Assignment");
-	goTitle->GetComponent<TextComponent>()->SetFont(font);
-	goTitle->GetComponent<TransformComponent>()->SetWorldPosition(80.f, 50.f);
-	goTitle->AddComponent<TextureComponent>();
-	goTitle->AddComponent<RenderComponent>();
-	scene.Add(goTitle);
+	// BUTTONS
+	// SINGLE
+	const auto goSingle = std::make_shared<dae::GameObject>();
+	goSingle->AddComponent<TextureComponent>();
+	goSingle->AddComponent<TextComponent>()->SetText("Single Player");
+	goSingle->GetComponent<TextComponent>()->SetFont(font);
+	auto SingleClick = [&]
+	{
+		dae::InputManager::GetInstance().RemoveButtons();
 
-	const auto goFps = std::make_shared<dae::GameObject>();
-	goFps->AddComponent<FpsComponent>();
-	goFps->AddComponent<TextComponent>();
-	goFps->GetComponent<TextComponent>()->SetFont(font);
-	goFps->GetComponent<TransformComponent>()->SetWorldPosition(0.f, 0.f);
-	goFps->AddComponent<TextureComponent>();
-	goFps->AddComponent<RenderComponent>();
-	scene.Add(goFps);
+		//TODO LEVEL MANAGER
+	};
+	const auto singleSize = goSingle->GetComponent<TextComponent>()->GetSize();
+	const glm::vec2 singlePos{ windowWidth / 2.f - static_cast<float>(singleSize.x) / 2.f, 150.f };
+	goSingle->AddComponent<ButtonComponent>()->Setup(singlePos,static_cast<float>(singleSize.x), static_cast<float>(singleSize.y), SingleClick);
+	goSingle->GetComponent<TransformComponent>()->SetLocalPosition(singlePos.x, singlePos.y);
+	goSingle->AddComponent<RenderComponent>();
+	scene.Add(goSingle);
 
-	const auto goChef = std::make_shared<dae::GameObject>();
-	goChef->GetComponent<TransformComponent>()->SetWorldPosition(100.f, 300.f);
-	goChef->AddComponent<TextureComponent>()->SetTexture("Chef.png");
-	goChef->AddComponent<RenderComponent>();
-	scene.Add(goChef);
+	// COOP
+	const auto goCoop = std::make_shared<dae::GameObject>();
+	goCoop->AddComponent<TextureComponent>();
+	goCoop->AddComponent<TextComponent>()->SetText("CO-OP");
+	goCoop->GetComponent<TextComponent>()->SetFont(font);
+	auto coopClick = [&]
+	{
+		dae::InputManager::GetInstance().RemoveButtons();
 
-	const auto goHotDog = std::make_shared<dae::GameObject>();
-	goHotDog->GetComponent<TransformComponent>()->SetLocalPosition(200.f, 300.f);
-	goHotDog->AddComponent<TextureComponent>()->SetTexture("MrHotDog.png");
-	goHotDog->AddComponent<RenderComponent>();
-	scene.Add(goHotDog);
+		//TODO LEVEL MANAGER
+	};
+	const auto coopSize = goCoop->GetComponent<TextComponent>()->GetSize();
+	const glm::vec2 coopPos{ windowWidth / 2.f - static_cast<float>(coopSize.x) / 2.f, 250.f };
+	goCoop->AddComponent<ButtonComponent>()->Setup(singlePos, static_cast<float>(coopSize.x), static_cast<float>(coopSize.y), coopClick);
+	goCoop->GetComponent<TransformComponent>()->SetLocalPosition(coopPos.x, coopPos.y);
+	goCoop->AddComponent<RenderComponent>();
+	scene.Add(goCoop);
 
-	const auto goPickle = std::make_shared<dae::GameObject>();
-	goPickle->GetComponent<TransformComponent>()->SetLocalPosition(300.f, 300.f);
-	goPickle->AddComponent<TextureComponent>()->SetTexture("MrPickle.png");
-	goPickle->AddComponent<RenderComponent>();
-	scene.Add(goPickle);
+	// VERSUS
+	const auto goVersus = std::make_shared<dae::GameObject>();
+	goVersus->AddComponent<TextureComponent>();
+	goVersus->AddComponent<TextComponent>()->SetText("Versus");
+	goVersus->GetComponent<TextComponent>()->SetFont(font);
+	auto versusClick = [&]
+	{
+		dae::InputManager::GetInstance().RemoveButtons();
 
-	const auto goEgg = std::make_shared<dae::GameObject>();
-	goEgg->GetComponent<TransformComponent>()->SetLocalPosition(400.f, 300.f);
-	goEgg->AddComponent<TextureComponent>()->SetTexture("MrEgg.png");
-	goEgg->AddComponent<RenderComponent>();
-	scene.Add(goEgg);
+		//TODO LEVEL MANAGER
+	};
+	const auto versusSize = goCoop->GetComponent<TextComponent>()->GetSize();
+	const glm::vec2 versusPos{ windowWidth / 2.f - static_cast<float>(versusSize.x) / 2.f, 350.f };
+	goVersus->AddComponent<ButtonComponent>()->Setup(singlePos, static_cast<float>(versusSize.x), 24, versusClick);
+	goVersus->GetComponent<TransformComponent>()->SetLocalPosition(versusPos.x, versusPos.y);
+	goVersus->AddComponent<RenderComponent>();
+	scene.Add(goVersus);
 }
 
 int main(int, char* []) {

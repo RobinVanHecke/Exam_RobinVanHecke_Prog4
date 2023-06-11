@@ -4,22 +4,19 @@
 
 #include "Component.h"
 
-namespace dae
+class ButtonComponent final : public Component
 {
-	class ButtonComponent final : public Component
-	{
-	public:
-		ButtonComponent(GameObject* pOwner, const glm::vec2& pos, float width, float height, std::function<void()> onClick);
+public:
+	ButtonComponent(dae::GameObject* pOwner);
 
-		void OnMouseClick(const glm::vec2& mousePos) const;
+	void Setup(const glm::vec2& pos, float width, float height, const std::function<void()>& onClick);
 
-	private:
-		glm::vec2 m_Pos;
+	void OnMouseClick(const glm::vec2& mousePos) const;
 
-		float m_Width, m_Height;
+private:
+	glm::vec2 m_Pos;
 
-		std::function<void()> m_OnClick;
-	};
+	float m_Width, m_Height;
 
-
-}
+	std::function<void()> m_OnClick;
+};

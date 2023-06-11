@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 
 namespace  dae
 {
@@ -22,9 +23,9 @@ namespace  dae
 	{
 	public:
 		static BaseSoundSystem& GetSoundSystem() { return *m_pSoundSystem; }
-		static void RegisterSoundSystem(BaseSoundSystem* pSoundSystem) { m_pSoundSystem = pSoundSystem; }
+		static void RegisterSoundSystem(std::unique_ptr<BaseSoundSystem> pSoundSystem) { m_pSoundSystem = std::move(pSoundSystem); }
 
 	private:
-		static BaseSoundSystem* m_pSoundSystem;
+		static std::unique_ptr<BaseSoundSystem> m_pSoundSystem;
 	};
 }

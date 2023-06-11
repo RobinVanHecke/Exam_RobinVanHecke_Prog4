@@ -51,8 +51,14 @@ void TextComponent::Update(float /*deltaT*/)
 		if (!m_Text.empty())
 		{
 			GetOwner()->GetComponent<TextureComponent>()->SetTexture(std::make_unique<dae::Texture2D>(texture));
+			m_Size = GetOwner()->GetComponent<TextureComponent>()->GetSize();
 		}
 
 		m_NeedsUpdate = false;
 	}
+}
+
+glm::ivec2 TextComponent::GetSize()
+{
+	return m_Size;
 }

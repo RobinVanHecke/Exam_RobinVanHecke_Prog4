@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <string>
+#include <glm/vec2.hpp>
 
 #include "Component.h"
 
@@ -20,6 +21,7 @@ public:
 	void SetFont(const std::shared_ptr<dae::Font>& pFont);
 
 	void Update(float /*deltaT*/) override;
+	glm::ivec2 GetSize();
 
 
 private:
@@ -27,6 +29,7 @@ private:
 
 	std::string m_Text;
 	std::shared_ptr<dae::Font> m_pFont;
+	glm::ivec2 m_Size{};
 
 };
 
