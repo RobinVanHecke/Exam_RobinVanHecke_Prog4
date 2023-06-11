@@ -12,9 +12,7 @@ TransformComponent::TransformComponent(dae::GameObject* gameObject) :
 #pragma region world
 void TransformComponent::SetWorldPosition(const float newXPos, const float newYPos)
 {
-	const auto pOwnerParent = GetOwner()->GetParent();
-
-	if (!pOwnerParent)
+	if (const auto pOwnerParent = GetOwner()->GetParent(); !pOwnerParent)
 	{
 		m_LocalPosition.x = newXPos;
 		m_LocalPosition.y = newYPos;

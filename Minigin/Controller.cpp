@@ -1,5 +1,4 @@
 #include "Controller.h"
-#include "Controller.h"
 #include <Windows.h>
 #include <XInput.h>
 
@@ -10,7 +9,7 @@ namespace dae
 	class Controller::ControllerImpl final
 	{
 	public:
-		explicit ControllerImpl(const int index)
+		ControllerImpl(const int index)
 		{
 			if (index == -1)
 				m_Index = InputManager::GetInstance().GetAmountOfControllers();
@@ -92,7 +91,7 @@ namespace dae
 
 		glm::vec2 GetThumbDir(const ControllerAxis thumb) const
 		{
-			glm::vec2 thumbDir;
+			glm::vec2 thumbDir{};
 
 			switch (thumb)
 			{
@@ -158,6 +157,8 @@ namespace dae
 	Controller::Controller(int index) : m_pControllerImpl{ std::make_unique<ControllerImpl>(index) }
 	{
 	}
+
+	Controller::~Controller() = default;
 
 	void Controller::Update() const
 	{

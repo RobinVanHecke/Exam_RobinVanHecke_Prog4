@@ -14,7 +14,7 @@ namespace dae
 		Controller();
 		explicit Controller(int index);
 
-		~Controller() = default;
+		~Controller();
 		Controller(const Controller& other) = delete;
 		Controller(Controller&& other) = default;
 		Controller& operator=(const Controller& other) = delete;
