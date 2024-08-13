@@ -33,7 +33,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BurgerTime.cpp">
+    <ClCompile Include="Pacman.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MoveCommand.cpp">

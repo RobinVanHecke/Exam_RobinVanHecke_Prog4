@@ -7,6 +7,9 @@
 #include <chrono>
 
 #include "Minigin.h"
+
+#include <thread>
+
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "Renderer.h"
