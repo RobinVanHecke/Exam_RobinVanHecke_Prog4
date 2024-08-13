@@ -3,7 +3,13 @@
 
 enum class CellType
 {
-		// celltype
+	FloorShort, FloorLong,
+	Ladder,
+	Plate,
+	EmptyShort, EmptyLong,
+	UpShort, UpLong,
+	DownShort, DownLong,
+	BothShort, BothLong
 };
 
 struct GridCell
