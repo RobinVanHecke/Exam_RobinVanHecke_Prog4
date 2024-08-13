@@ -41,10 +41,10 @@ void load()
 	dae::InputManager::GetInstance().AddCommand(std::move(soundCommand), dae::KeyState::Pressed, dae::InputManager::Key::P);
 
 	// BACKGROUND
-	const auto goBackground = std::make_shared<dae::GameObject>();
-	goBackground->AddComponent<TextureComponent>()->SetTexture("../Data/Textures/Level1.png");
-	goBackground->AddComponent<RenderComponent>();
-	scene.Add(goBackground);
+	//const auto goBackground = std::make_shared<dae::GameObject>();
+	//goBackground->AddComponent<TextureComponent>()->SetTexture("../Data/Textures/Level1.png");
+	//goBackground->AddComponent<RenderComponent>();
+	//scene.Add(goBackground);
 
 	// LOGO
 	const auto goLogo = std::make_shared<dae::GameObject>();

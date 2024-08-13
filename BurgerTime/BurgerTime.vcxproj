@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{B7C56788-85B5-4B50-8944-BB16E04398CC}</ProjectGuid>
-    <RootNamespace>Pacman</RootNamespace>
+    <ProjectGuid>{dd200ec7-3bbc-4943-b70b-a606d029ce82}</ProjectGuid>
+    <RootNamespace>BurgerTime</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>Pacman</ProjectName>
   </PropertyGroup>
@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AiComponent.cpp" />
+    <ClCompile Include="BurgerComponent.cpp" />
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="DamageComponent.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -173,6 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AiComponent.h" />
+    <ClInclude Include="BurgerComponent.h" />
     <ClInclude Include="DamageComponent.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="Grid.h" />
