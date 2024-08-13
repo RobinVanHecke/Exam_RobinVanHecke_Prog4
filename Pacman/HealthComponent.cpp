@@ -20,8 +20,7 @@ void HealthComponent::OnEvent(std::any data, int id, const bool engineEvent)
 		if (collidedObjects.m_pObject != GetOwner())
 			return;
 
-		//TODO burger
-		//auto
+
 	}
 }
 

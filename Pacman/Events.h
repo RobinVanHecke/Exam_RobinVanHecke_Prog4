@@ -7,7 +7,6 @@ enum class Event
 	Moved,
 
 	PlayerDeath, EnemyDeath,
-	BurgerDrop, BurgerPlate,
 
 	EnemyDrop1,
 	EnemyDrop2,
